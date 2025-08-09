@@ -39,6 +39,8 @@ The HippoMemory system processes user input through a series of biologically ins
 
 The entire process is visualized below:
 
+This might not be very clear, as I'm not yet accustomed to using Markdown for drawing graphs. If you have any questions, please feel free to raise them.
+
 ```mermaid
 graph TD
     subgraph "HippoMemory System"
