@@ -46,22 +46,22 @@ graph TD
         
         subgraph "1. Input Processing & Memory Compression"
             direction LR
-            A[User Input Text] --> B1[MemoryCompressor<br>(EnhancedMemoryCompressor)]
-            B1 --> B2[Tokenizer & Encoder<br>(MiniLM)]
-            B2 --> B3[WindowEntropyCalculator<br>(Information Entropy)]
-            B2 --> B4[NLP (spaCy)<br>(Entity/Relation Extraction)]
-            B3 --> B5[Fusion Network<br>(Importance Fusion)]
+            A[User Input Text] --> B1[MemoryCompressor\n]
+            B1 --> B2[Tokenizer & Encoder\n(MiniLM)]
+            B2 --> B3[WindowEntropyCalculator\n(Information Entropy)]
+            B2 --> B4[NLP (spaCy)\n(Entity/Relation Extraction)]
+            B3 --> B5[Fusion Network\n(Importance Fusion)]
             B4 --> B5
-            B5 --> B6[Dynamic Compression<br>(Adaptive Threshold)]
-            B6 --> C1[Compressed Memory Fragments<br>(Embeddings)]
+            B5 --> B6[Dynamic Compression\n(Adaptive Threshold)]
+            B6 --> C1[Compressed Memory Fragments\n(Embeddings)]
         end
 
         subgraph "2. Short-Term Memory Management (Hippocampus-like)"
             direction TB
-            C1 --> D1[HippocampalGate<br>]
-            D2[Short-Term Memory Buffer<br>(short_term_memory)] --> D1
-            D3[Time Delta<br>(time_delta)] --> D1
-            D1 --> D4[Gating Logic<br>(Forget/Retain/Compress)]
+            C1 --> D1[HippocampalGate\n]
+            D2[Short-Term Memory Buffer\n(short_term_memory)] --> D1
+            D3[Time Delta\n(time_delta)] --> D1
+            D1 --> D4[Gating Logic\n(Forget/Retain/Compress)]
             D4 --> D5[Updated Short-Term Memory]
             D5 --> D2
             D5 --> E1
@@ -69,10 +69,10 @@ graph TD
 
         subgraph "3. Long-Term Memory Storage & Retrieval (Graph Network)"
             direction TB
-            C1 --> E1[GraphMemory<br>]
-            E1 --> E2[Entity Mapping<br>(Entity Recognition/Mapping)]
-            E2 --> E3[DynamicGraphStorage<br>(Graph Storage & Updates)]
-            E3 --> E4[GNN<br>(Graph Neural Network Inference)]
+            C1 --> E1[GraphMemory\n]
+            E1 --> E2[Entity Mapping\n(Entity Recognition/Mapping)]
+            E2 --> E3[DynamicGraphStorage\n(Graph Storage & Updates)]
+            E3 --> E4[GNN\n(Graph Neural Network Inference)]
             E4 --> E5[Long-Term Memory Representation]
             E5 --> F2
         end
@@ -82,7 +82,7 @@ graph TD
             F1[Current LLM Input Embedding] --> F2[DynamicRouter]
             D5 --> F2
             E5 --> F2
-            F2 --> F3[Compute Fusion Weights<br>(Current, STM, LTM)]
+            F2 --> F3[Compute Fusion Weights\n(Current, STM, LTM)]
             F3 --> F4[Augmented Context Vector]
         end
     end
