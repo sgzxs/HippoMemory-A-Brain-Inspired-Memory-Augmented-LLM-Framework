@@ -41,28 +41,71 @@ The entire process is visualized below:
 
 ```mermaid
 graph TD
-    A[User Input] --> B(MemoryCompressor)
-    B --> B1[Token Embedding]
-    B --> B2[Entropy Calculation]
-    B --> B3[KG Triple Extraction]
-    B --> C[HippocampalGate]
-    C --> C1[Time Decay]
-    C --> C2[Memory Update]
-    C --> D[Short-Term Memory]
-    D --> C
-    B --> E[GraphMemory]
-    E --> E1[Entity Mapping]
-    E --> E2[Relation Discovery]
-    E --> E3[Dynamic Graph Storage]
-    E --> F[Long-Term Knowledge Graph]
-    F --> E
-    D --> G[HippoMemorySystem]
-    F --> G
-    C --> G
-    G --> H(Dynamic Router)
-    H --> I[Augmented Context]
-    I --> J[Large Language Model]
+    subgraph "HippoMemory System"
+        direction TB
+        
+        subgraph "1. Input Processing & Memory Compression"
+            direction LR
+            A[User Input Text] --> B1[MemoryCompressor<br>(EnhancedMemoryCompressor)]
+            B1 --> B2[Tokenizer & Encoder<br>(MiniLM)]
+            B2 --> B3[WindowEntropyCalculator<br>(Information Entropy)]
+            B2 --> B4[NLP (spaCy)<br>(Entity/Relation Extraction)]
+            B3 --> B5[Fusion Network<br>(Importance Fusion)]
+            B4 --> B5
+            B5 --> B6[Dynamic Compression<br>(Adaptive Threshold)]
+            B6 --> C1[Compressed Memory Fragments<br>(Embeddings)]
+        end
+
+        subgraph "2. Short-Term Memory Management (Hippocampus-like)"
+            direction TB
+            C1 --> D1[HippocampalGate<br>]
+            D2[Short-Term Memory Buffer<br>(short_term_memory)] --> D1
+            D3[Time Delta<br>(time_delta)] --> D1
+            D1 --> D4[Gating Logic<br>(Forget/Retain/Compress)]
+            D4 --> D5[Updated Short-Term Memory]
+            D5 --> D2
+            D5 --> E1
+        end
+
+        subgraph "3. Long-Term Memory Storage & Retrieval (Graph Network)"
+            direction TB
+            C1 --> E1[GraphMemory<br>]
+            E1 --> E2[Entity Mapping<br>(Entity Recognition/Mapping)]
+            E2 --> E3[DynamicGraphStorage<br>(Graph Storage & Updates)]
+            E3 --> E4[GNN<br>(Graph Neural Network Inference)]
+            E4 --> E5[Long-Term Memory Representation]
+            E5 --> F2
+        end
+
+        subgraph "4. Dynamic Routing & Context Augmentation"
+            direction LR
+            F1[Current LLM Input Embedding] --> F2[DynamicRouter]
+            D5 --> F2
+            E5 --> F2
+            F2 --> F3[Compute Fusion Weights<br>(Current, STM, LTM)]
+            F3 --> F4[Augmented Context Vector]
+        end
+    end
+
+    subgraph "External Interaction"
+        direction LR
+        F4 --> G[Large Language Model (LLM)]
+        G --> H[Final Response]
+        H --> A
+        I[Timestamp] --> D3
+    end
+
     style A fill:#f9f,stroke:#333
-    style J fill:#bbf,stroke:#333,color:#fff
-    style E fill:#cf9,stroke:#333
-    style C fill:#ffcc00,stroke:#333
+    style H fill:#f9f,stroke:#333
+    style D2 fill:#ffeb3b,stroke:#333
+    style E3 fill:#c8e6c9,stroke:#333
+    style E4 fill:#c8e6c9,stroke:#333
+    style F4 fill:#ffcc80,stroke:#333
+    
+    classDef module fill:#bbdefb,stroke:#333,stroke-width:2px;
+    classDef data fill:#ffcdd2,stroke:#333;
+    classDef process fill:#e1bee7,stroke:#333;
+    
+    class B1,D1,E1,F2 module;
+    class C1,D5,E5,F4,G data;
+    class B3,B5,B6,D4,E2,E4,F3 process;
